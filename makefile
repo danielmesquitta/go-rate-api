@@ -7,7 +7,7 @@ APP_NAME=go-rate-api
 default: dev
 
 dev:
-	@CompileDaemon -command="./$(APP_NAME)"
+	@air
 build:
 	@go build -o $(APP_NAME) main.go
 tidy:
