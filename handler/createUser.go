@@ -1,18 +1,19 @@
 package handler
 
 import (
-	"log"
 	"net/http"
+	"strings"
 
 	"github.com/danielmesquitta/go-rate-api/model"
 	"github.com/danielmesquitta/go-rate-api/util"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type CreateUserRequest struct {
-	Name     string `json:"name,omitempty" validate:"required"`
-	Email    string `json:"email,omitempty" validate:"required,email"`
-	Password string `json:"password,omitempty" validate:"required,min=8"`
+	Name     string `json:"name" validate:"required"`
+	Email    string `json:"email" validate:"required,email"`
+	Password string `json:"password" validate:"required,min=8"`
 }
 
 // @BasePath /api/v1
@@ -26,30 +27,50 @@ type CreateUserRequest struct {
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /user [post]
-func CreateUserHandler(ctx *gin.Context) {
+func CreateUserHandler(c *gin.Context) {
 	dto := CreateUserRequest{}
 
-	ctx.ShouldBindJSON(&dto)
+	// Bind request body to DTO
+	c.ShouldBindJSON(&dto)
+
+	// Trim and lowercase email
+	util.FormatEmail(&dto.Email)
+
+	// Trim name
+	dto.Name = strings.TrimSpace(dto.Name)
 
 	// Validate DTO
 	errs := util.Validator.Validate(dto)
 	if errs != nil {
-		sendError(ctx, http.StatusBadRequest, util.Validator.FormatErrs(errs))
+		sendError(c, http.StatusBadRequest, util.Validator.FormatErrs(errs))
 		return
 	}
 
+	// Check if user with same email already exists
+	if err := db.First(&model.User{}, "email = ?", dto.Email).Error; err == nil {
+		sendError(c, http.StatusBadRequest, "user registered with this email already exists")
+		return
+	}
+
+	// Hash password
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(dto.Password), 10)
+	if err != nil {
+		sendError(c, http.StatusInternalServerError, "failed to create hashed password")
+		return
+	}
+
+	// Create user model
 	user := model.User{
 		Name:     dto.Name,
 		Email:    dto.Email,
-		Password: dto.Password,
+		Password: string(hashedPassword),
 	}
 
 	// Create user
 	if err := db.Create(&user).Error; err != nil {
-		log.Println(err)
-		sendError(ctx, http.StatusInternalServerError, "failed to create user")
+		sendError(c, http.StatusInternalServerError, "failed to create user")
 		return
 	}
 
-	ctx.Writer.WriteHeader(http.StatusCreated)
+	c.Writer.WriteHeader(http.StatusCreated)
 }

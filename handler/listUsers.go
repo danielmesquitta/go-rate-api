@@ -21,13 +21,13 @@ type ListUsersResponse struct {
 // @Success 200 {object} ListUsersResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /users [get]
-func ListUsersHandler(ctx *gin.Context) {
+func ListUsersHandler(c *gin.Context) {
 	users := []model.User{}
 
 	// Find users
 	if err := db.Find(&users).Error; err != nil {
 		log.Println(err)
-		sendError(ctx, http.StatusInternalServerError, "failed to list users")
+		sendError(c, http.StatusInternalServerError, "failed to list users")
 		return
 	}
 
@@ -35,5 +35,5 @@ func ListUsersHandler(ctx *gin.Context) {
 		Data: users,
 	}
 
-	ctx.JSON(http.StatusOK, response)
+	c.JSON(http.StatusOK, response)
 }

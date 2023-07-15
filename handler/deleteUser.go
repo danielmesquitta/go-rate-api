@@ -18,11 +18,11 @@ import (
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Router /user [delete]
-func DeleteUserHandler(ctx *gin.Context) {
+func DeleteUserHandler(c *gin.Context) {
 	// Get id from query and validate
-	id := ctx.Query("id")
+	id := c.Query("id")
 	if id == "" {
-		sendError(ctx, http.StatusBadRequest, "id is required")
+		sendError(c, http.StatusBadRequest, "id is required")
 		return
 	}
 
@@ -31,16 +31,16 @@ func DeleteUserHandler(ctx *gin.Context) {
 	// Find user
 	if err := db.First(&user, id).Error; err != nil {
 		log.Println(err.Error())
-		sendError(ctx, http.StatusNotFound, "user not found")
+		sendError(c, http.StatusNotFound, "user not found")
 		return
 	}
 
 	// Delete user
 	if err := db.Delete(&user).Error; err != nil {
 		log.Println(err.Error())
-		sendError(ctx, http.StatusInternalServerError, "failed to delete user")
+		sendError(c, http.StatusInternalServerError, "failed to delete user")
 		return
 	}
 
-	ctx.Writer.WriteHeader(http.StatusNoContent)
+	c.Writer.WriteHeader(http.StatusNoContent)
 }

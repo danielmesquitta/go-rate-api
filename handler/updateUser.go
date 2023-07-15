@@ -28,22 +28,22 @@ type UpdateUserRequest struct {
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /user [put]
-func UpdateUserHandler(ctx *gin.Context) {
+func UpdateUserHandler(c *gin.Context) {
 	// Get id from query and validate
-	id := ctx.Query("id")
+	id := c.Query("id")
 	if id == "" {
-		sendError(ctx, http.StatusBadRequest, "id is required")
+		sendError(c, http.StatusBadRequest, "id is required")
 		return
 	}
 
 	dto := UpdateUserRequest{}
 
-	ctx.BindJSON(&dto)
+	c.BindJSON(&dto)
 
 	// Validate DTO
 	errs := util.Validator.Validate(dto)
 	if errs != nil {
-		sendError(ctx, http.StatusBadRequest, util.Validator.FormatErrs(errs))
+		sendError(c, http.StatusBadRequest, util.Validator.FormatErrs(errs))
 		return
 	}
 
@@ -51,7 +51,7 @@ func UpdateUserHandler(ctx *gin.Context) {
 
 	// Find user
 	if err := db.First(&user, id).Error; err != nil {
-		sendError(ctx, http.StatusNotFound, "user not found")
+		sendError(c, http.StatusNotFound, "user not found")
 		return
 	}
 
@@ -62,9 +62,9 @@ func UpdateUserHandler(ctx *gin.Context) {
 	// Save opening
 	if err := db.Save(&user).Error; err != nil {
 		log.Println(err)
-		sendError(ctx, http.StatusInternalServerError, "error updating user")
+		sendError(c, http.StatusInternalServerError, "error updating user")
 		return
 	}
 
-	ctx.Writer.WriteHeader(http.StatusNoContent)
+	c.Writer.WriteHeader(http.StatusNoContent)
 }
