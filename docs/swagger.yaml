@@ -1,5 +1,5 @@
 definitions:
-  controller.CreateUserRequest:
+  handler.CreateUserRequest:
     properties:
       email:
         type: string
@@ -13,21 +13,21 @@ definitions:
     - name
     - password
     type: object
-  controller.ErrorResponse:
+  handler.ErrorResponse:
     properties:
       errorCode:
         type: integer
       message:
         type: string
     type: object
-  controller.ListUsersResponse:
+  handler.ListUsersResponse:
     properties:
       data:
         items:
-          $ref: '#/definitions/controller.ShowUserResponse'
+          $ref: '#/definitions/handler.ShowUserResponse'
         type: array
     type: object
-  controller.ShowUserResponse:
+  handler.ShowUserResponse:
     properties:
       createdAt:
         type: string
@@ -40,7 +40,7 @@ definitions:
       updatedAt:
         type: string
     type: object
-  controller.UpdateUserRequest:
+  handler.UpdateUserRequest:
     properties:
       email:
         type: string
@@ -72,11 +72,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/controller.ErrorResponse'
+            $ref: '#/definitions/handler.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/controller.ErrorResponse'
+            $ref: '#/definitions/handler.ErrorResponse'
       summary: Delete user
       tags:
       - Users
@@ -96,15 +96,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/controller.ShowUserResponse'
+            $ref: '#/definitions/handler.ShowUserResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/controller.ErrorResponse'
+            $ref: '#/definitions/handler.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/controller.ErrorResponse'
+            $ref: '#/definitions/handler.ErrorResponse'
       summary: Show user
       tags:
       - Users
@@ -118,7 +118,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/controller.CreateUserRequest'
+          $ref: '#/definitions/handler.CreateUserRequest'
       produces:
       - application/json
       responses:
@@ -127,11 +127,11 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/controller.ErrorResponse'
+            $ref: '#/definitions/handler.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/controller.ErrorResponse'
+            $ref: '#/definitions/handler.ErrorResponse'
       summary: Create user
       tags:
       - Users
@@ -150,7 +150,7 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/controller.UpdateUserRequest'
+          $ref: '#/definitions/handler.UpdateUserRequest'
       produces:
       - application/json
       responses:
@@ -159,15 +159,15 @@ paths:
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/controller.ErrorResponse'
+            $ref: '#/definitions/handler.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/controller.ErrorResponse'
+            $ref: '#/definitions/handler.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/controller.ErrorResponse'
+            $ref: '#/definitions/handler.ErrorResponse'
       summary: Update user
       tags:
       - Users
@@ -182,11 +182,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/controller.ListUsersResponse'
+            $ref: '#/definitions/handler.ListUsersResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/controller.ErrorResponse'
+            $ref: '#/definitions/handler.ErrorResponse'
       summary: List users
       tags:
       - Users

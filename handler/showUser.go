@@ -1,4 +1,4 @@
-package controller
+package handler
 
 import (
 	"net/http"
@@ -27,7 +27,7 @@ type ShowUserResponse struct {
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Router /user [get]
-func ShowUserController(ctx *gin.Context) {
+func ShowUserHandler(ctx *gin.Context) {
 	// Get id from query and validate
 	id := ctx.Query("id")
 	if id == "" {

@@ -1,4 +1,4 @@
-package controller
+package handler
 
 import (
 	"log"
@@ -18,7 +18,7 @@ import (
 // @Failure 400 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
 // @Router /user [delete]
-func DeleteUserController(ctx *gin.Context) {
+func DeleteUserHandler(ctx *gin.Context) {
 	// Get id from query and validate
 	id := ctx.Query("id")
 	if id == "" {

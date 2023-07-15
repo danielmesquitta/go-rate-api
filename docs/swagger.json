@@ -30,19 +30,19 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/controller.ShowUserResponse"
+                            "$ref": "#/definitions/handler.ShowUserResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     }
                 }
@@ -73,7 +73,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/controller.UpdateUserRequest"
+                            "$ref": "#/definitions/handler.UpdateUserRequest"
                         }
                     }
                 ],
@@ -84,19 +84,19 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     }
                 }
@@ -120,7 +120,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/controller.CreateUserRequest"
+                            "$ref": "#/definitions/handler.CreateUserRequest"
                         }
                     }
                 ],
@@ -131,13 +131,13 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     }
                 }
@@ -170,13 +170,13 @@
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     }
                 }
@@ -199,13 +199,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/controller.ListUsersResponse"
+                            "$ref": "#/definitions/handler.ListUsersResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     }
                 }
@@ -213,7 +213,7 @@
         }
     },
     "definitions": {
-        "controller.CreateUserRequest": {
+        "handler.CreateUserRequest": {
             "type": "object",
             "required": [
                 "email",
@@ -233,7 +233,7 @@
                 }
             }
         },
-        "controller.ErrorResponse": {
+        "handler.ErrorResponse": {
             "type": "object",
             "properties": {
                 "errorCode": {
@@ -244,18 +244,18 @@
                 }
             }
         },
-        "controller.ListUsersResponse": {
+        "handler.ListUsersResponse": {
             "type": "object",
             "properties": {
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/controller.ShowUserResponse"
+                        "$ref": "#/definitions/handler.ShowUserResponse"
                     }
                 }
             }
         },
-        "controller.ShowUserResponse": {
+        "handler.ShowUserResponse": {
             "type": "object",
             "properties": {
                 "createdAt": {
@@ -275,7 +275,7 @@
                 }
             }
         },
-        "controller.UpdateUserRequest": {
+        "handler.UpdateUserRequest": {
             "type": "object",
             "properties": {
                 "email": {

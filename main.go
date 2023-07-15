@@ -2,13 +2,13 @@ package main
 
 import (
 	"github.com/danielmesquitta/go-rate-api/config"
-	"github.com/danielmesquitta/go-rate-api/controller"
+	"github.com/danielmesquitta/go-rate-api/handler"
 	"github.com/danielmesquitta/go-rate-api/router"
 )
 
 func init() {
 	config.Init()
-	controller.Init()
+	handler.Init()
 }
 
 func main() {

@@ -1,4 +1,4 @@
-package controller
+package handler
 
 import (
 	"log"
@@ -21,7 +21,7 @@ type ListUsersResponse struct {
 // @Success 200 {object} ListUsersResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /users [get]
-func ListUsersController(ctx *gin.Context) {
+func ListUsersHandler(ctx *gin.Context) {
 	users := []model.User{}
 
 	// Find users

@@ -1,4 +1,4 @@
-package controller
+package handler
 
 import (
 	"log"
@@ -26,7 +26,7 @@ type CreateUserRequest struct {
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /user [post]
-func CreateUserController(ctx *gin.Context) {
+func CreateUserHandler(ctx *gin.Context) {
 	dto := CreateUserRequest{}
 
 	ctx.ShouldBindJSON(&dto)

@@ -1,4 +1,4 @@
-package controller
+package handler
 
 import (
 	"log"
@@ -28,7 +28,7 @@ type UpdateUserRequest struct {
 // @Failure 404 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
 // @Router /user [put]
-func UpdateUserController(ctx *gin.Context) {
+func UpdateUserHandler(ctx *gin.Context) {
 	// Get id from query and validate
 	id := ctx.Query("id")
 	if id == "" {

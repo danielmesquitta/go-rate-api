@@ -42,19 +42,19 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/controller.ShowUserResponse"
+                            "$ref": "#/definitions/handler.ShowUserResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     }
                 }
@@ -85,7 +85,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/controller.UpdateUserRequest"
+                            "$ref": "#/definitions/handler.UpdateUserRequest"
                         }
                     }
                 ],
@@ -96,19 +96,19 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     }
                 }
@@ -132,7 +132,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/controller.CreateUserRequest"
+                            "$ref": "#/definitions/handler.CreateUserRequest"
                         }
                     }
                 ],
@@ -143,13 +143,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     }
                 }
@@ -182,13 +182,13 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     }
                 }
@@ -211,13 +211,13 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/controller.ListUsersResponse"
+                            "$ref": "#/definitions/handler.ListUsersResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/controller.ErrorResponse"
+                            "$ref": "#/definitions/handler.ErrorResponse"
                         }
                     }
                 }
@@ -225,7 +225,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "controller.CreateUserRequest": {
+        "handler.CreateUserRequest": {
             "type": "object",
             "required": [
                 "email",
@@ -245,7 +245,7 @@ const docTemplate = `{
                 }
             }
         },
-        "controller.ErrorResponse": {
+        "handler.ErrorResponse": {
             "type": "object",
             "properties": {
                 "errorCode": {
@@ -256,18 +256,18 @@ const docTemplate = `{
                 }
             }
         },
-        "controller.ListUsersResponse": {
+        "handler.ListUsersResponse": {
             "type": "object",
             "properties": {
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/controller.ShowUserResponse"
+                        "$ref": "#/definitions/handler.ShowUserResponse"
                     }
                 }
             }
         },
-        "controller.ShowUserResponse": {
+        "handler.ShowUserResponse": {
             "type": "object",
             "properties": {
                 "createdAt": {
@@ -287,7 +287,7 @@ const docTemplate = `{
                 }
             }
         },
-        "controller.UpdateUserRequest": {
+        "handler.UpdateUserRequest": {
             "type": "object",
             "properties": {
                 "email": {
